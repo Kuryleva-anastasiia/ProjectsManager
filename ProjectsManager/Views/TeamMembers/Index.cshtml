@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ProjectsManager.Models.TeamMember>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Список сотрудников по командам";
 }
 
-<h1>Index</h1>
+<h1>Список сотрудников по командам</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить сотрудника в команду</a>
 </p>
 <table class="table">
     <thead>
@@ -28,12 +28,14 @@
                 @Html.DisplayFor(modelItem => item.Team.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Login)
+                    @Html.DisplayFor(modelItem => item.User.LastName)
+                    @Html.DisplayFor(modelItem => item.User.Name)
+                    @Html.DisplayFor(modelItem => item.User.Patronymic)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |@* 
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

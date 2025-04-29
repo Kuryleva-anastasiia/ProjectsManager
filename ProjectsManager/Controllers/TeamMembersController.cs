@@ -48,8 +48,16 @@ namespace ProjectsManager.Controllers
         // GET: TeamMembers/Create
         public IActionResult Create()
         {
+            var projectsManagerContext = _context.Users;
+            var users = projectsManagerContext.ToList();
+
+            var dropDownList = users.Select(x => new {
+                Id = x.Id,
+                Name = x.LastName.ToString() + " " + x.Name.ToString() + " " + x.Patronymic.ToString()
+            }).ToList();
+
             ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Name");
+            ViewData["UserId"] = new SelectList(dropDownList, "Id", "Name");
             return View();
         }
 
@@ -66,8 +74,16 @@ namespace ProjectsManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var projectsManagerContext = _context.Users;
+            var users = projectsManagerContext.ToList();
+
+            var dropDownList = users.Select(x => new {
+                Id = x.Id,
+                Name = x.LastName.ToString() + " " + x.Name.ToString() + " " + x.Patronymic.ToString()
+            }).ToList();
+
             ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name", teamMember.TeamId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Name", teamMember.UserId);
+            ViewData["UserId"] = new SelectList(dropDownList, "Id", "Name", teamMember.UserId);
             return View(teamMember);
         }
 
@@ -84,8 +100,17 @@ namespace ProjectsManager.Controllers
             {
                 return NotFound();
             }
+
+            var projectsManagerContext = _context.Users;
+            var users = projectsManagerContext.ToList();
+
+            var dropDownList = users.Select(x => new {
+                Id = x.Id,
+                Name = x.LastName.ToString() + " " + x.Name.ToString() + " " + x.Patronymic.ToString()
+            }).ToList();
+
             ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name", teamMember.TeamId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Name", teamMember.UserId);
+            ViewData["UserId"] = new SelectList(dropDownList, "Id", "Name", teamMember.UserId);
             return View(teamMember);
         }
 
@@ -121,8 +146,17 @@ namespace ProjectsManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            var projectsManagerContext = _context.Users;
+            var users = projectsManagerContext.ToList();
+
+            var dropDownList = users.Select(x => new {
+                Id = x.Id,
+                Name = x.LastName.ToString() + " " + x.Name.ToString() + " " + x.Patronymic.ToString()
+            }).ToList();
+
             ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name", teamMember.TeamId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Name", teamMember.UserId);
+            ViewData["UserId"] = new SelectList(dropDownList, "Id", "Name", teamMember.UserId);
             return View(teamMember);
         }
 
