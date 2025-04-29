@@ -1,0 +1,45 @@
+﻿@model ProjectsManager.Models.User
+
+@{
+    string a = "@";
+}
+<section class="login container">
+
+<h1 class="form-title">Вход</h1>
+
+<div class="row container">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Login" class="control-label"></label>
+                <input asp-for="Login" class="form-control" type="email"
+                       placeholder="Ваш Emaill"
+                       pattern="/^([a-z0-9_\.-])+@a+[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i"
+                       required />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" type="password"
+                           placeholder="Ваш пароль" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Войти" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="form-link" href="~/users/create">Регистрация</a>
+    <a class="form-link" href="~/home/index">Вернуться на главную страницу</a>
+</div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
