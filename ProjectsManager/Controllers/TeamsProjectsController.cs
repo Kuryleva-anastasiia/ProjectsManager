@@ -48,8 +48,9 @@ namespace ProjectsManager.Controllers
         // GET: TeamsProjects/Create
         public IActionResult Create()
         {
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id");
-            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Id");
+
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name");
+            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name");
             return View();
         }
 
@@ -66,8 +67,8 @@ namespace ProjectsManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", teamsProject.ProjectId);
-            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Id", teamsProject.TeamId);
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name", teamsProject.ProjectId);
+            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name", teamsProject.TeamId);
             return View(teamsProject);
         }
 
@@ -84,8 +85,8 @@ namespace ProjectsManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", teamsProject.ProjectId);
-            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Id", teamsProject.TeamId);
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name", teamsProject.ProjectId);
+            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name", teamsProject.TeamId);
             return View(teamsProject);
         }
 
@@ -121,8 +122,8 @@ namespace ProjectsManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Id", teamsProject.ProjectId);
-            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Id", teamsProject.TeamId);
+            ViewData["ProjectId"] = new SelectList(_context.Projects, "Id", "Name", teamsProject.ProjectId);
+            ViewData["TeamId"] = new SelectList(_context.Teams, "Id", "Name", teamsProject.TeamId);
             return View(teamsProject);
         }
 

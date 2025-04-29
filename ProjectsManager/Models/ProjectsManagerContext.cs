@@ -96,8 +96,6 @@ public partial class ProjectsManagerContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__TeamsPro__3214EC079A8BFBAC");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
             entity.HasOne(d => d.Project).WithMany(p => p.TeamsProjects).HasConstraintName("FK_TeamsProjects_ToProjects");
 
             entity.HasOne(d => d.Team).WithMany(p => p.TeamsProjects).HasConstraintName("FK_TeamsProjects_ToTeams");
