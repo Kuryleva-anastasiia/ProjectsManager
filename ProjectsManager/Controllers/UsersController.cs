@@ -52,6 +52,16 @@ namespace ProjectsManager.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            List<SelectListItem> dropDownList = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Admin", Value = "1" },
+                new SelectListItem { Text = "Manager", Value = "2" },
+                new SelectListItem { Text = "User", Value = "3" }
+
+            };
+
+            ViewData["Role"] = new SelectList(dropDownList, "Text", "Text", "User");
+
             return View();
         }
 
@@ -93,6 +103,15 @@ namespace ProjectsManager.Controllers
                     _toastNotification.Error("Логин и пароль обязательны для заполнения!");
                 }
             }
+            List<SelectListItem> dropDownList = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Admin", Value = "1" },
+                new SelectListItem { Text = "Manager", Value = "2" },
+                new SelectListItem { Text = "User", Value = "3" }
+
+            };
+
+            ViewData["Role"] = new SelectList(dropDownList, "Text", "Text", user.Role);
             return View(user);
         }
 
