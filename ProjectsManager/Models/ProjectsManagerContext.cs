@@ -32,7 +32,10 @@ public partial class ProjectsManagerContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\College\\Дипломы\\ProjectsManager\\ProjectsManager\\App_data\\ProjectsManager.mdf;Integrated Security=True");
+    {
+        optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\College\\Дипломы\\ProjectsManager\\ProjectsManager\\App_data\\ProjectsManager.mdf;Integrated Security=True");
+    }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

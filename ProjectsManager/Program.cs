@@ -53,7 +53,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Users}/{action=Login}/{id?}");
 
 app.MapGet("/Users/SignIn/{id:int}", async (string? returnUrl, HttpContext context, int id, ProjectsManagerContext _context) =>
 {
@@ -71,6 +71,15 @@ app.MapGet("/Users/SignIn/{id:int}", async (string? returnUrl, HttpContext conte
         return Results.Redirect($"~/Users/Details/{user.Result.Id}");
     }
     return Results.Unauthorized();
+});
+
+app.MapGet("/Users/SignOut", async (HttpContext context) =>
+{
+    // Выход из системы и удаление куки
+    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+    // Перенаправление на страницу входа или другую страницу
+    return Results.Redirect("~/Users/Login");
 });
 
 app.Run();
