@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjectsManager.Models;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace ProjectsManager.Controllers
 {
@@ -19,10 +20,35 @@ namespace ProjectsManager.Controllers
         }
 
         // GET: Tasks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? sort)
         {
-            var projectsManagerContext = _context.Tasks.Include(t => t.AssignedUser).Include(t => t.Priority).Include(t => t.Project).Include(t => t.Status);
-            return View(await projectsManagerContext.ToListAsync());
+            IQueryable<Models.Task>? tasks = _context.Tasks.Include(t => t.AssignedUser).Include(t => t.Priority).Include(t => t.Project).Include(t => t.Status);
+
+            // сортировка
+            switch (sort)
+            {
+                case "Личные":
+                    tasks = tasks.Where(s => s.AssignedUser.Login == User.Identity.Name);
+                    break;
+                case "По приоритету":
+                    tasks = tasks.OrderBy(s => s.PriorityId);
+                    break;
+                default:
+                    tasks = tasks.OrderBy(s => s.Id);
+                    break;
+            }
+
+            List<string> sortList = new List<string>() { "Все", "Личные", "По приоритету" };
+
+
+
+            if (sort != null)
+            {
+                ViewData["sort"] = new SelectList(sortList, sort);
+            }
+            else { ViewData["sort"] = new SelectList(sortList, "Все"); }
+
+            return View(await tasks.ToListAsync());
         }
 
         // GET: Tasks/Details/5
