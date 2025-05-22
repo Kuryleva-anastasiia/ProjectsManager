@@ -79,6 +79,10 @@ namespace ProjectsManager.Controllers
                     var count = _context.Users.Where(u => u.Login == user.Login).Count();
                     if (count == 0)
                     {
+                        if (user.Role == null)
+                        {
+                            user.Role = "User";
+                        }
                         try
                         {
                             user.Password = Crypto.Hash(user.Password.ToString(), "SHA-256");
@@ -121,10 +125,23 @@ namespace ProjectsManager.Controllers
             return View();
         }
 
+        private static int fail = 0; // Счетчик неудачных попыток
+        private static DateTime? lockoutEndTime = null; // Время окончания блокировки
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Login([Bind("Login,Password")] User model)
         {
+
+            if (lockoutEndTime.HasValue && DateTime.Now < lockoutEndTime.Value)
+            {
+                // Если пользователь заблокирован
+                int min = lockoutEndTime.Value.Minute - DateTime.Now.Minute;
+                int sec = lockoutEndTime.Value.Second - DateTime.Now.Second;
+                int time = min * 60 + sec;
+                _toastNotification.Custom("Вход ограничен. Когда уведомление исчезнет, повторный вход будет разрешен", time, "Orange");
+                return View();
+            }
 
 
             if (model.Login != null && model.Password != null)
@@ -139,7 +156,7 @@ namespace ProjectsManager.Controllers
 
                 if (user.Result != null && user.Result.Role != null)
                 {
-
+                    fail = 0;
                     int id = Convert.ToInt32(user.Result.Id);
 
                     model.Id = id;
@@ -148,7 +165,19 @@ namespace ProjectsManager.Controllers
                 }
                 else
                 {
-                    _toastNotification.Error("Аккаунт не найден!");
+                    ++fail;
+                    if (fail < 3)
+                    {
+                        int notFail = 3 - fail;
+                        _toastNotification.Error("Аккаунт не найден! Осталось попыток: " + notFail);
+                    }
+                    else
+                    {
+                        _toastNotification.Error("Аккаунт не найден!");
+                        _toastNotification.Custom("Вход ограничен на 2 минуты. Когда уведомление исчезнет, повторный вход будет разрешен", 120, "Orange");
+                        lockoutEndTime = DateTime.Now.AddMinutes(2); // Установка времени блокировки на 2 минуты
+                    }
+                        
                     return View(model);
                 }
             }
@@ -234,13 +263,25 @@ namespace ProjectsManager.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var user = await _context.Users.FindAsync(id);
-            if (user != null)
+
+            int count = _context.Projects.Where(u => u.User == user).Count();
+            int count2 = _context.TeamMembers.Where(u => u.User == user).Count();
+
+            if (count > 0 || count2 > 0)
             {
-                _context.Users.Remove(user);
+                _toastNotification.Error("Не разрешено удаление пользователя, который уже участвует в проектах!");
+            }
+            else {
+                if (user != null)
+                {
+                    _context.Users.Remove(user);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Delete));
         }
 
         private bool UserExists(int id)
