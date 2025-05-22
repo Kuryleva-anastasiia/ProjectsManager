@@ -6,9 +6,13 @@
 
 <h1>Список задач</h1>
 
-<p>
-    <a asp-action="Create">Создать новую задачу</a>
-</p>
+@if (!User.IsInRole("User"))
+{
+    <p>
+        <a asp-action="Create">Создать новую задачу</a>
+    </p>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -37,35 +41,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Project.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompletionDate)
-            </td>
-            <td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletionDate)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.AssignedUser.LastName)
                     @Html.DisplayFor(modelItem => item.AssignedUser.Name)
                     @Html.DisplayFor(modelItem => item.AssignedUser.Patronymic)
-            </td>
-            <td>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Priority.Name)
-            </td>
-            <td>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Status.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+                <td>
+                    @if (!User.IsInRole("User") || (User.IsInRole("User") && @User?.Identity?.Name == item.AssignedUser.Login))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> 
+                    }
+
+                    | <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+
+                    @if (!User.IsInRole("User") || (User.IsInRole("User") && @User?.Identity?.Name == item.AssignedUser.Login))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    }
+                    
             </td>
         </tr>
 }

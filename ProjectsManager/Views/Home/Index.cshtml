@@ -24,27 +24,26 @@
             @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="Index">Teams</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="Index">Команды</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Tasks" asp-action="Index">Tasks</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Tasks" asp-action="Index">Задачи</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="TeamMembers" asp-action="Index">Team Members</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="TeamMembers" asp-action="Index">Участники команд</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="TeamsProjects" asp-action="Index">Teams Projects</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="TeamsProjects" asp-action="Index">Проекты по командам</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Проекты</a>
                 </li>
 
             }
             @if (User.IsInRole("User"))
             {
-                <p>You just a user!</p>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Tasks" asp-action="Index">Tasks</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Tasks" asp-action="Index">Задачи</a>
                 </li>
             }
 
