@@ -4,10 +4,10 @@
     ViewData["Title"] = "Список команд";
 }
 
-<h1>Список команд</h1>
+<h1 class="form-title">Список команд</h1>
 
 <p>
-    <a asp-action="Create">Создать новую команду</a>
+    <a class="form-link" asp-action="Create">Создать новую команду</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.CreationDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    <a class="form-link" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                    <a class="form-link" asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                    <a class="form-link" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

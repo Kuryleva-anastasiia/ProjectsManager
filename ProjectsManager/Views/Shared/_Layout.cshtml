@@ -10,28 +10,51 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProjectsManager</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container container-layout container-fluid">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("User"))
+                    {
+                        <a class="navbar-brand text-light" asp-area="" asp-controller="Tasks" asp-action="Index">ProjectsManager</a>
+                    }
+                    else
+                    {
+                        <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">ProjectsManager</a>
+                    }
+                }
+                else
+                {
+                    <a class="navbar-brand text-light" asp-area="" asp-controller="Users" asp-action="Login">ProjectsManager</a>
+                }
+
+
+                <button class="bd0 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="SignOut">Выйти</a>
+                                @{
+                                    int id = Convert.ToInt32(User.Claims.FirstOrDefault(s => s.Type == "ID").Value);
+                                }
+                                <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@id">Личный кабинет</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="SignOut">Выйти</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Войти</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Login">Личный кабинет</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Login">Войти</a>
                             </li>
                         }
                         

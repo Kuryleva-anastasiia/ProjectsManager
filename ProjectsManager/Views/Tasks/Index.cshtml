@@ -4,12 +4,12 @@
     ViewData["Title"] = "Список задач";
 }
 
-<h1>Список задач</h1>
+<h1 class="form-title">Список задач</h1>
 
 @if (!User.IsInRole("User"))
 {
     <p>
-        <a asp-action="Create">Создать новую задачу</a>
+        <a class="form-link" asp-action="Create">Создать новую задачу</a>
     </p>
 }
 
@@ -80,14 +80,14 @@
                 <td>
                     @if (!User.IsInRole("User") || (User.IsInRole("User") && @User?.Identity?.Name == item.AssignedUser.Login))
                     {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> 
+                        <a class="form-link" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                     }
 
-                    | <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                    | <a class="form-link" asp-action="Details" asp-route-id="@item.Id">Детали</a> |
 
                     @if (!User.IsInRole("User") || (User.IsInRole("User") && @User?.Identity?.Name == item.AssignedUser.Login))
                     {
-                        <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                        <a class="form-link" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
                     }
                     
             </td>

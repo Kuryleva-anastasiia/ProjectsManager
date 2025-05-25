@@ -20,3 +20,77 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.bd0 {
+    border-color: none;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+.navbar {
+    background-color: #05384E;
+    color: white;
+}
+
+.text-center .navbar-nav .nav-item .nav-link:hover {
+    font-weight: 600;
+}
+
+/*/////////////  Œ¡Ÿ»≈  //////////////*/
+
+a {
+    text-decoration: none;
+}
+
+.form-title {
+    color: #2A343D;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px
+}
+
+.form-control {
+    border-radius: 8px;
+    width: 230px;
+    height: 43px;
+    padding: 0 14px;
+    font-size: 12px;
+    line-height: 15px;
+    border-color: #2A343D;
+}
+
+.control-label {
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 15px;
+    margin-right: 24px;
+    color: #2A343D;
+}
+
+.btn-primary {
+    font-family: "Open Sans", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    color: #ffffff;
+    border-radius: 2000px;
+    background-color: #2A343D;
+    padding: 7px 20px;
+    border: none;
+}
+
+.form-link {
+    font-size: 16px;
+    line-height: 15px;
+    /*margin-right: 24px;*/
+    color: #2A343D;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+    

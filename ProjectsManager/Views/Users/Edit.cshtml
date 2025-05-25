@@ -4,7 +4,7 @@
     ViewData["Title"] = "Редактирование аккаунта";
 }
 
-<h1>Редактирование аккаунта</h1>
+<h1 class="form-title">Редактирование аккаунта</h1>
 
 <div class="row">
     <div class="col-md-4">
@@ -61,7 +61,10 @@
 </div>
 
 <div>
-    <a asp-action="Index">Вернуться</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="form-link" asp-action="Index">Вернуться</a>
+    }
 </div>
 
 @section Scripts {

@@ -4,9 +4,9 @@
     ViewData["Title"] = "Удаление задачи";
 }
 
-<h1>Удаление задачи</h1>
+<h1 class="form-title">Удаление задачи</h1>
 
-<h3>Вы уверены, что хотите удалить задачу?</h3>
+<h3 class="form-title">Вы уверены, что хотите удалить задачу?</h3>
 <div>
     <dl class="row">
         <dt class = "col-sm-2">
@@ -63,7 +63,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-action="Index">Вернуться</a>
+        <input type="submit" value="Удалить" class="btn btn-primary" /> |
+        <a class="form-link" asp-action="Index">Вернуться</a>
     </form>
 </div>

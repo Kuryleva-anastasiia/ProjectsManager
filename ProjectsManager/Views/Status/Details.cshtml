@@ -4,7 +4,7 @@
     ViewData["Title"] = "Детали статуса";
 }
 
-<h1>Детали статуса</h1>
+<h1 class="form-title">Детали статуса</h1>
 
 <div>
     <dl class="row">
@@ -17,6 +17,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Редактировать</a> |
-    <a asp-action="Index">Вернуться</a>
+    <a class="form-link" asp-action="Edit" asp-route-id="@Model?.Id">Редактировать</a> |
+    <a class="form-link" asp-action="Index">Вернуться</a>
 </div>

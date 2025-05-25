@@ -7,18 +7,18 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="text-center">
-        <h1 class="display-4">Welcome @User?.Identity?.Name</h1>
+        <h1 class="display-4"></h1>
         <ul class="navbar-nav flex-grow-1">
              @if (User.IsInRole("Admin"))
             { 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Пользователи</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Status" asp-action="Index">Status</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Status" asp-action="Index">Статусы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Priorities" asp-action="Index">Priorities</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Priorities" asp-action="Index">Приоритеты</a>
                 </li>
              } 
             @if (User.IsInRole("Admin") || User.IsInRole("Manager"))

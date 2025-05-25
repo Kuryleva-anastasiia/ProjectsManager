@@ -15,11 +15,11 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <h1>Регистрация нового пользователя</h1>
+    <h1 class="form-title">Регистрация нового пользователя</h1>
 }
 else
 {
-    <h1>Регистрация</h1>
+    <h1 class="form-title">Регистрация</h1>
 }
 
 
@@ -77,7 +77,7 @@ else
 </div>
 
 <div>
-    <a asp-action="Index">Войти в аккаунт</a>
+    <a class="form-link" asp-action="Index">Войти в аккаунт</a>
 </div>
 
 @section Scripts {
