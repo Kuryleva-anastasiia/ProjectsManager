@@ -19,7 +19,10 @@
             <label class="control-label">Сортировка: </label>
             <select class="form-control mr-30" name="sort" asp-items="@ViewBag.sort"></select>
         </div>
-
+        <div class="form-group d-inline-block">
+            <label class="control-label">Поиск: </label>
+            <input class="form-control mr-30" name="name" value="@ViewBag.name" />
+        </div>
 
         <input type="submit" value="Фильтр" class="btn btn-primary" />
     </div>

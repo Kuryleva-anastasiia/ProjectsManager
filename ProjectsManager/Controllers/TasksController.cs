@@ -20,7 +20,7 @@ namespace ProjectsManager.Controllers
         }
 
         // GET: Tasks
-        public async Task<IActionResult> Index(string? sort)
+        public async Task<IActionResult> Index(string? name, string? sort)
         {
             IQueryable<Models.Task>? tasks = _context.Tasks.Include(t => t.AssignedUser).Include(t => t.Priority).Include(t => t.Project).Include(t => t.Status);
 
@@ -40,13 +40,19 @@ namespace ProjectsManager.Controllers
 
             List<string> sortList = new List<string>() { "Все", "Личные", "По приоритету" };
 
-
+            // Поиск по описанию задачи, названию проекта, по ФИО ответственного
+            if (!string.IsNullOrEmpty(name))
+            {
+                tasks = tasks.Where(p => p.Description!.Contains(name) || p.Project.Name!.Contains(name) || p.AssignedUser.Name!.Contains(name) || p.AssignedUser.LastName!.Contains(name) || p.AssignedUser.Patronymic!.Contains(name));
+                ViewData["name"] = name;
+            }
 
             if (sort != null)
             {
                 ViewData["sort"] = new SelectList(sortList, sort);
             }
             else { ViewData["sort"] = new SelectList(sortList, "Все"); }
+
 
             return View(await tasks.ToListAsync());
         }
