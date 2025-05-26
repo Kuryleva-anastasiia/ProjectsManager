@@ -53,6 +53,10 @@ a {
     margin-bottom: 15px
 }
 
+.form-control-data {
+    margin-bottom: 15px;
+}
+
 .form-control {
     border-radius: 8px;
     width: 230px;

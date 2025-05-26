@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ProjectsManager.Models.Task>
+
+@{
+    ViewData["Title"] = "Отчеты";
+    decimal sum = 0;
+}
+
+<section class="login container">
+
+    <h1 class="form-title">Отчет по выполненным задачам за текущий месяц</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompletionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AssignedUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Project.Name)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CompletionDate.ToString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssignedUser.LastName)
+                        @Html.DisplayFor(modelItem => item.AssignedUser.Name)
+                        @Html.DisplayFor(modelItem => item.AssignedUser.Patronymic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Project.Name)
+                    </td>
+                </tr>
+
+                sum += 1;
+
+            }
+            <tr>
+                <td>
+                    Выполнено задач: @sum
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form asp-action="Analize" method="post">
+        <div class="form-group">
+            <label class="control-label">Начало периода:</label>
+            <input name="start" class="form-control-data form-control" type="date" required />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Конец периода: </label>
+            <input name="end" class="form-control-data form-control" type="date" required />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Название файла</label>
+            <input name="file" placeholder="Название файла" class="form-control-data form-control" maxlength="20" min="1" required />
+        </div>
+        <input type="submit" value="Сформировать отчет" class="btn btn-primary" />
+    </form>
+</section>
+
+
+
