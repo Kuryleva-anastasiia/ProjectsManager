@@ -15,13 +15,13 @@ public partial class Team
     public int Id { get; set; }
 
     [DisplayName("Название")]
-    [StringLength(100)]
-    [Required]
+    [StringLength(100, ErrorMessage = "Максимальная длина 100 символов")]
+    [Required(ErrorMessage = "Название обязательно для заполнения")]
     public string? Name { get; set; }
 
     [DisplayName("Дата создания")]
     [DataType(DataType.Date)]
-    [Required]
+    [Required(ErrorMessage = "Дата обязательна для заполнения")]
     public DateOnly? CreationDate { get; set; }
 
     [InverseProperty("Team")]

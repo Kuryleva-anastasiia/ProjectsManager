@@ -33,7 +33,7 @@ public partial class ProjectsManagerContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\College\\Дипломы\\ProjectsManager\\ProjectsManager\\App_data\\ProjectsManager.mdf;Integrated Security=True");
+        optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\ProjectsManager.mdf;Integrated Security=True");
     }
 
 

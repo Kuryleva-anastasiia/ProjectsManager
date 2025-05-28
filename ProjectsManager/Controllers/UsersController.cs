@@ -12,6 +12,7 @@ using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
 
+
 namespace ProjectsManager.Controllers
 {
     public class UsersController : Controller
@@ -324,6 +325,8 @@ namespace ProjectsManager.Controllers
                 return NotFound();
             }
 
+            ViewData["File"] = "Отчет " + DateTime.Now.ToString("dd.MM.yyyy");
+
             return View(tasks);
         }
 
@@ -336,8 +339,6 @@ namespace ProjectsManager.Controllers
 
             Microsoft.Office.Interop.Excel.Application winword = new Microsoft.Office.Interop.Excel.Application()
             {
-                //Отобразить Excel
-                Visible = true,
                 //Количество листов в рабочей книге
                 SheetsInNewWorkbook = 1
             };
@@ -382,14 +383,26 @@ namespace ProjectsManager.Controllers
                 j++;
             }
 
-            sheet.Cells[j, 5] = "Выполнено задач: " + Convert.ToString(j-1);
+            sheet.Cells[j, 5] = "Выполнено задач: " + Convert.ToString(j-4);
 
             sheet.Columns.AutoFit();
 
+            if (file == null) { file = sheet.Name; }
+
+
+
             // и места где его нужно сохранить*/
-            app.Application.ActiveWorkbook.SaveAs($"{_appEnvironment.WebRootPath}/Отчеты/{file}.xlsx", Type.Missing,
+            try
+            {
+                app.Application.ActiveWorkbook.SaveAs($"{_appEnvironment.ContentRootPath}/Отчеты/{file}.xlsx", Type.Missing,
               Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlNoChange,
               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            }
+            catch (Exception ex) {
+                _toastNotification.Error("Такой файл уже существует!");
+                return RedirectToAction("Analize");
+            }
+            
 
             app.Quit();
 

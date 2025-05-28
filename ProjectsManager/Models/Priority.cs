@@ -17,7 +17,7 @@ public partial class Priority
 
     [DisplayName("Приоритет")]
     [StringLength(50)]
-    [Required]
+    [Required(ErrorMessage = "Название обязательно для заполнения")]
     public string? Name { get; set; }
 
     [InverseProperty("Priority")]

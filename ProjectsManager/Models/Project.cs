@@ -14,9 +14,9 @@ public partial class Project
     [HiddenInput(DisplayValue = false)]
     public int Id { get; set; }
 
-    [StringLength(100)]
+    [StringLength(100,ErrorMessage = "Максимальная длина 100 символов")]
     [DisplayName("Название")]
-    [Required]
+    [Required(ErrorMessage = "Название обязательно для заполнения")]
     public string? Name { get; set; }
 
     [Column(TypeName = "ntext")]
@@ -29,7 +29,7 @@ public partial class Project
 
     [DisplayName("Дата")]
     [DataType(DataType.Date)]
-    [Required]
+    [Required(ErrorMessage = "Дата обязательна для заполнения")]
     public DateOnly? CreationDate { get; set; }
 
     [InverseProperty("Project")]

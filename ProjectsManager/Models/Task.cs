@@ -15,8 +15,8 @@ public partial class Task
     public int Id { get; set; }
 
     [DisplayName("Название")]
-    [StringLength(50)]
-    [Required]
+    [StringLength(50, ErrorMessage = "Максимальная длина 50 символов")]
+    [Required(ErrorMessage = "Название обязательно для заполнения")]
     public string? Title { get; set; }
 
     [Column(TypeName = "ntext")]
@@ -38,12 +38,12 @@ public partial class Task
 
     [DisplayName("Дата создания")]
     [DataType(DataType.Date)]
-    [Required]
+    [Required(ErrorMessage = "Дата обязательна для заполнения")]
     public DateOnly? CreationDate { get; set; }
 
     [DisplayName("Дата выполнения")]
     [DataType(DataType.Date)]
-    [Required]
+    [Required(ErrorMessage = "Дата обязательна для заполнения")]
     public DateOnly? CompletionDate { get; set; }
 
     [DisplayName("Ответственный")]
