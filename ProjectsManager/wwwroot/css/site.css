@@ -38,6 +38,10 @@ body {
     font-weight: 600;
 }
 
+main {
+    padding-bottom: 160px;
+}
+
 /*/////////////  Œ¡Ÿ»≈  //////////////*/
 
 a {
@@ -97,4 +101,22 @@ a {
     display: inline-block;
 }
 
-    
+/*/////////////////// FOOTER ///////////////////////*/
+
+.footer {
+    background-color: #354F5A;
+    /*background-color: #05384e;*/
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 160px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    color: #c3c8ce;
+}
