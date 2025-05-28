@@ -40,7 +40,7 @@
             {
                 <div class="form-group">
                     <label asp-for="Role" class="control-label"></label>
-                    <input asp-for="Role" class="form-control" />
+                    <select asp-for="Role" class="form-control" asp-items="ViewBag.Role"></select>
                     <span asp-validation-for="Role" class="text-danger"></span>
                 </div>
             }

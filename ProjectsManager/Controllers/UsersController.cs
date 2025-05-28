@@ -205,6 +205,16 @@ namespace ProjectsManager.Controllers
             {
                 return NotFound();
             }
+
+            List<SelectListItem> dropDownList = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Admin", Value = "1" },
+                new SelectListItem { Text = "Manager", Value = "2" },
+                new SelectListItem { Text = "User", Value = "3" }
+
+            };
+
+            ViewData["Role"] = new SelectList(dropDownList, "Text", "Text", user.Role);
             return View(user);
         }
 
@@ -240,6 +250,15 @@ namespace ProjectsManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            List<SelectListItem> dropDownList = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Admin", Value = "1" },
+                new SelectListItem { Text = "Manager", Value = "2" },
+                new SelectListItem { Text = "User", Value = "3" }
+
+            };
+
+            ViewData["Role"] = new SelectList(dropDownList, "Text", "Text", user.Role);
             return View(user);
         }
 
