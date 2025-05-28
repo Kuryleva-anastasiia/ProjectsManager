@@ -37,7 +37,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Отчеты\Отчет-05-06-24.xlsx" />
+    <Content Include="Отчеты\Отчет-17-05-23.xlsx" />
+    <Content Include="Отчеты\Отчет-17-05-24.xlsx" />
+    <Content Include="Отчеты\Отчет.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
+    <PackageReference Include="Grpc.Core" Version="2.46.6" />
     <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
@@ -51,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Отчеты\" />
+    <Folder Include="Отчеты\" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,11 @@ using AspNetCoreHero.ToastNotification.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string appDataPath = Path.Combine(builder.Environment.ContentRootPath, "App_Data");
+AppDomain.CurrentDomain.SetData("DataDirectory", appDataPath);
+AppDomain.CurrentDomain.SetData("SaveDir", builder.Environment.ContentRootPath);
+
+
 builder.Services.AddDbContext<ProjectsManagerContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectsManagerContext"));

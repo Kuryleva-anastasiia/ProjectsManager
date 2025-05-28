@@ -46,15 +46,12 @@ else
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
                 <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger" type="tel"
-                      placeholder="+7xxxxxxxxxx" minlength="12" maxlength="12" value="+7" required></span>
+                <span asp-validation-for="Phone" class="text-danger" type="tel" placeholder="+7xxxxxxxxxx" minlength="12" maxlength="12" value="+7" required></span>
             </div>
             <div class="form-group">
                 <label asp-for="Login" class="control-label"></label>
                 <input asp-for="Login" class="form-control" />
-                <span asp-validation-for="Login" class="text-danger" type="email"
-                      pattern="/^([a-z0-9_\.-])+@a+[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i"
-                      required></span>
+                <span asp-validation-for="Login" class="text-danger" required></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
