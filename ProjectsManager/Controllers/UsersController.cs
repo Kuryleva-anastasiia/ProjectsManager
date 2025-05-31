@@ -394,7 +394,7 @@ namespace ProjectsManager.Controllers
             // и места где его нужно сохранить*/
             try
             {
-                app.Application.ActiveWorkbook.SaveAs($"{_appEnvironment.ContentRootPath}/Отчеты/{file}.xlsx", Type.Missing,
+                app.Application.ActiveWorkbook.SaveAs($"{_appEnvironment.ContentRootPath}\\Отчеты\\{file}.xlsx", Type.Missing,
               Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlNoChange,
               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             }
@@ -411,7 +411,19 @@ namespace ProjectsManager.Controllers
             winword.Quit();
 
             _toastNotification.Custom("Отчет создан в папке \"Отчеты\"!", 6, "#602AC3", "fa fa-user");
-            return RedirectToAction("Analize");
+            return RedirectToAction("GetFile", new { fileName = file });
         }
+
+        public IActionResult GetFile(string fileName)
+        {
+            // Путь к файлу
+            string file_path = $"{_appEnvironment.ContentRootPath}\\Отчеты\\{fileName}.xlsx";
+            // Тип файла - content-type
+            string file_type = "application/xlsx";
+            // Имя файла - необязательно
+            string file_name = $"{ fileName }.xlsx";
+            return PhysicalFile(file_path, file_type, file_name);
+        }
+
     }
 }
